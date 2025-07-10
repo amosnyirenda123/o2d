@@ -16,7 +16,7 @@ export class Object2D {
   pivotX: number;
   pivotY: number;
   vx: number;
-  wy: number;
+  vy: number;
   children: Object2D[];
   parent: Object2D | undefined;
   shadow: boolean;
@@ -51,7 +51,7 @@ export class Object2D {
     this.pivotX = 0.5;
     this.pivotY = 0.5;
     this.vx = 0;
-    this.wy = 0;
+    this.vy = 0;
     this.children = [];
     this.parent = undefined;
 

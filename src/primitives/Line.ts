@@ -1,7 +1,7 @@
 import { Object2D } from "./Object2D";
-import { StrokeStyleType } from "../types";
+import { Renderable, StrokeStyleType } from "../types";
 
-class Line extends Object2D {
+class Line extends Object2D implements Renderable {
   strokeStyle: StrokeStyleType;
   lineWidth: number;
   lineJoin: CanvasLineJoin;

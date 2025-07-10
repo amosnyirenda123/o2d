@@ -1,7 +1,7 @@
-import { Object2D } from "./Object2D";
-import { FillStyleType, StrokeStyleType } from "../types";
+import { Object2D } from "./Object2D.js";
+import { FillStyleType, Renderable, StrokeStyleType } from "../types";
 
-class Rectangle extends Object2D {
+class Rectangle extends Object2D implements Renderable {
   mask: boolean;
   strokeStyle: StrokeStyleType;
   lineWidth: number;
@@ -21,6 +21,11 @@ class Rectangle extends Object2D {
     this.lineWidth = lineWidth;
     this.width = width;
     this.height = height;
+    this.x = x;
+    this.y = y;
+
+    //use rectangle as mask
+    // will mask any sprites that are children of this rectangle sprite
     this.mask = false;
   }
 
@@ -29,6 +34,7 @@ class Rectangle extends Object2D {
     ctx.lineWidth = this.lineWidth;
     ctx.fillStyle = this.fillStyle;
     ctx.beginPath();
+
     ctx.rect(
       //Draw the sprite around its `pivotX` and `pivotY` point
       -this.width * this.pivotX,
