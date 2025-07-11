@@ -1,7 +1,7 @@
-import { Object2D } from "./Object2D";
+import { Object2D } from "./Object2D.js";
 import { FillStyleType, StrokeStyleType } from "../types";
 
-class Circle extends Object2D {
+export class Circle extends Object2D {
   mask: boolean;
   strokeStyle: StrokeStyleType;
   lineWidth: number;

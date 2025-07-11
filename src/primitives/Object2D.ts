@@ -39,7 +39,6 @@ export class Object2D {
     this.y = 0;
     this.width = 0;
     this.height = 0;
-
     //Rotation, alpha, visible, and scale properties
     this.rotation = 0;
     this.alpha = 1;

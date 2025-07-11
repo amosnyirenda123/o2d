@@ -1,4 +1,4 @@
-import { Object2D } from "./Object2D";
+import { Object2D } from "./Object2D.js";
 import { Renderable, StrokeStyleType } from "../types";
 
 class Line extends Object2D implements Renderable {

@@ -1,4 +1,4 @@
-import { Object2D } from "./Object2D";
+import { Object2D } from "./Object2D.js";
 
 class Text extends Object2D {
   textBaseline: CanvasTextBaseline;

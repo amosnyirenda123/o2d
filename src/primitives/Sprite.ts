@@ -1,8 +1,8 @@
-import { AtlasFrame, SourceType, TextureAtlas } from "../types";
-import { Object2D } from "./Object2D";
+import { AtlasFrame, Renderable, SourceType, TextureAtlas } from "../types";
+import { Object2D } from "./Object2D.js";
 
-class Sprite extends Object2D {
-  source: SourceType;
+export class Sprite extends Object2D implements Renderable {
+  source: undefined | CanvasImageSource;
   x: number;
   y: number;
   sourceX: number;
@@ -12,7 +12,6 @@ class Sprite extends Object2D {
   tilesetFrame: undefined | AtlasFrame;
   constructor(source: SourceType, x: number, y: number) {
     super();
-    this.source = source;
     this.x = x;
     this.y = y;
     this.sourceX = 0;
@@ -20,19 +19,19 @@ class Sprite extends Object2D {
     this.sourceWidth = 0;
     this.sourceHeight = 0;
 
-    if (source instanceof HTMLImageElement) {
+    if (source instanceof Image) {
       this.createFromImage(source);
     }
     //Image from texture atlas
     else if (isAtlasFrame(source)) {
-      this.createFromAtlas(source);
+      this.createFromAtlasFrame(source);
     }
   }
 
   createFromImage(source: HTMLImageElement) {
     // Load asset file
     // then assets.getAsset("key") to locate image
-    if (!(source instanceof HTMLImageElement)) {
+    if (!(source instanceof Image)) {
       throw new Error(`${source} is not an image object`);
     } else {
       //create sprite
@@ -45,7 +44,7 @@ class Sprite extends Object2D {
       this.sourceHeight = source.height;
     }
   }
-  createFromAtlas(source: AtlasFrame) {
+  createFromAtlasFrame(source: AtlasFrame) {
     // load image atlas and json file
     // then assets.getAsset("key");
     this.tilesetFrame = source;
@@ -56,6 +55,20 @@ class Sprite extends Object2D {
     this.height = this.tilesetFrame.frame.h;
     this.sourceWidth = this.tilesetFrame.frame.w;
     this.sourceHeight = this.tilesetFrame.frame.h;
+  }
+
+  render(ctx: CanvasRenderingContext2D): void {
+    ctx.drawImage(
+      this.source as CanvasImageSource,
+      this.sourceX,
+      this.sourceY,
+      this.sourceWidth,
+      this.sourceHeight,
+      -this.width * this.pivotX,
+      -this.height * this.pivotY,
+      this.width,
+      this.height
+    );
   }
 }
 
@@ -80,3 +93,8 @@ function isAtlasFrame(source: SourceType): source is AtlasFrame {
 // if (isTextureAtlas(source)) {
 //   console.log(source.frames["cat.png"].frame.w); //
 // }
+
+export function sprite(source: SourceType, x: number, y: number) {
+  let sprite = new Sprite(source, x, y);
+  return sprite;
+}

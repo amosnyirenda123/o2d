@@ -1,3 +1,6 @@
+import { Circle } from "./primitives/Circle";
+import { Object2D } from "./primitives/Object2D";
+
 type ImageAsset = HTMLImageElement;
 type JSONAsset = any;
 type AudioAsset = HTMLAudioElement;
@@ -76,3 +79,17 @@ export type SourceType = string | HTMLImageElement | AtlasFrame | TextureAtlas;
 export interface Renderable {
   render(ctx: CanvasRenderingContext2D): void;
 }
+
+export interface Physics {
+  mass: number;
+  frictionX: number;
+  frictionY: number;
+  accelerationX: number;
+  accelarationY: number;
+  gravity: number;
+}
+
+export type ObjectWithPhysics = Object2D & { physics?: Physics };
+export type CircleWithPhysics = Circle & { physics?: Physics };
+
+export type CollisionSide = "left" | "right" | "top" | "bottom" | undefined;

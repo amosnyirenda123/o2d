@@ -1,4 +1,4 @@
-import { Object2D } from "./Object2D";
+import { Object2D } from "./Object2D.js";
 
 export class Group extends Object2D {
   private _newWidth = 0;
