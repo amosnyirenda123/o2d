@@ -93,3 +93,19 @@ export type ObjectWithPhysics = Object2D & { physics?: Physics };
 export type CircleWithPhysics = Circle & { physics?: Physics };
 
 export type CollisionSide = "left" | "right" | "top" | "bottom" | undefined;
+export type Point = {
+  x: number;
+  y: number;
+};
+export type Vector = {
+  vx: number;
+  vy: number;
+};
+
+export type Surface = Point & {
+  magnitude: number;
+  dx: number;
+  dy: number;
+  lx: number;
+  ly: number;
+};

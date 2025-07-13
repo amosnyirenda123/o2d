@@ -1,3 +1,6 @@
+import { Circle } from "../primitives/Circle";
+import { Object2D } from "../primitives/Object2D";
+
 export class Pointer {
   element: HTMLElement;
   scale: number;
@@ -148,6 +151,27 @@ export class Pointer {
     this.isDown = false;
     if (this.release) this.release();
     event.preventDefault();
+  }
+
+  public hitTestSprite(sprite: Object2D): boolean {
+    let hit = false;
+    if (!sprite.circular) {
+      let left = sprite.gx,
+        right = sprite.gx + sprite.width,
+        top = sprite.gy,
+        bottom = sprite.gy + sprite.height;
+
+      hit = this.x > left && this.x < right && this.y > top && this.y < bottom;
+    } else {
+      let circularSprite = sprite as Circle;
+      let vx = this.x - (circularSprite.gx + circularSprite.radius),
+        vy = this.y - (circularSprite.gy + circularSprite.radius);
+
+      let distanceSq = vx * vx + vy * vy;
+
+      hit = distanceSq < circularSprite.radius * circularSprite.radius;
+    }
+    return hit;
   }
 }
 
